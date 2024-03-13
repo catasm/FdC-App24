@@ -1,0 +1,142 @@
+#:kivy 2.3.0
+
+TabManager:
+    Home:
+    Menu:
+
+
+<TextLabel@Label>:
+    color: 0, 0, 0, 1
+
+<Button>:
+    color: 1, 1, 1, 1
+    bold: True
+
+<Home>:
+    name: "home"
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        padding: 30
+
+        canvas.before:
+            Color:
+                rgba: 0.6, 0.6, 0.6, 1  
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    
+        GridLayout:
+            cols: 1
+            size_hint: (1, 0.2)
+            row_default_height: '48dp'
+            row_force_default: True
+
+            TextLabel:
+                text: "Sistema de Riego"
+                font_size: 68
+                bold: True
+            TextLabel:
+                text: "INSM 2024"
+                font_size: 40
+            
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+
+        GridLayout:
+            size_hint: 0.5, 0.5
+            cols: 1
+            spacing: '30dp'
+
+            GridLayout:
+                cols: 1
+                row_default_height: '60dp'
+                row_force_default: True
+
+                TextLabel:
+                    text: "Aspersores"
+                    font_size: 60
+                    bold: True
+                MySwitch:
+                    id: aspersores
+
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: '20dp'
+
+                TextLabel:
+                    text: "Humedad del suelo"
+                    font_size: 46
+                    bold: True
+                TextLabel:
+                    id: humidity
+                    text: "97%"
+                    font_size: 50
+                TextLabel:
+                    text: "Ultimo riego"
+                    font_size: 46
+                    bold: True
+                TextLabel:
+                    id: last_time
+                    text: "22:30"
+                    font_size: 50
+                                   
+    AnchorLayout:
+        anchor_x: 'right'
+        anchor_y: 'bottom'
+        padding: '20dp'
+
+        Button:
+            text: "Burger"
+            size_hint: 0.15, 0.05
+            on_release:
+                app.root.current = "menu"
+                root.manager.transition.direction = "left"
+
+<Menu>:
+    name: "menu"
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        
+        canvas.before:
+            Color:
+                rgba: 0.6, 0.6, 0.6, 1  
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        GridLayout:
+            size_hint: 0.75, 0.3
+            cols: 1
+            spacing: '20dp'
+
+            Button:
+                text: "Programar\nHORARIO de riego"
+                text_size: self.width - dp(30), None
+                font_size: '24dp'
+            Button:
+                text: "Ver\nHISTORICO"
+                text_size: self.width - dp(30), None
+                font_size: '24dp'
+            Button:
+                text: "Configuración\nde la APP"
+                text_size: self.width - dp(30), None
+                font_size: '24dp'
+                
+
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'bottom'
+        padding: '20dp'
+
+        Button:
+            text: "Return"
+            size_hint: 0.15, 0.05
+            on_release:
+                app.root.current = "home"
+                root.manager.transition.direction = "right"
+
