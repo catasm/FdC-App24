@@ -10,15 +10,6 @@ Config.set('graphics', 'width', '600')
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
-from kivy.uix.switch import Switch
-
-class MySwitch(Switch):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.bind(active=self.hi)
-
-    def hi(self, _, state):
-        Connect.ping()
 
 class Home(Screen):
     pass

@@ -6,7 +6,7 @@ TabManager:
 
 
 <TextLabel@Label>:
-    color: 0, 0, 0, 1
+    color: 1, 1, 1, 1
 
 <Button>:
     color: 1, 1, 1, 1
@@ -22,7 +22,7 @@ TabManager:
 
         canvas.before:
             Color:
-                rgba: 0.6, 0.6, 0.6, 1  
+                rgba: 0.21, 0.21, 0.21, 1  
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -30,7 +30,7 @@ TabManager:
         GridLayout:
             cols: 1
             size_hint: (1, 0.2)
-            row_default_height: '48dp'
+            row_default_height: '50dp'
             row_force_default: True
 
             TextLabel:
@@ -46,55 +46,79 @@ TabManager:
         anchor_x: 'center'
         anchor_y: 'center'
 
-        GridLayout:
-            size_hint: 0.5, 0.5
-            cols: 1
+
+
+        BoxLayout:
+            orientation: 'vertical'
             spacing: '30dp'
+            size_hint: 0.5, 0.6
 
-            GridLayout:
-                cols: 1
-                row_default_height: '60dp'
-                row_force_default: True
+            TextLabel:
+                text: "ASPERSORES"
+                font_size: 55
+                bold: True
+            Switch:
+                id: aspersores
 
-                TextLabel:
-                    text: "Aspersores"
-                    font_size: 60
-                    bold: True
-                MySwitch:
-                    id: aspersores
-
-            BoxLayout:
-                orientation: 'vertical'
-                spacing: '20dp'
-
-                TextLabel:
-                    text: "Humedad del suelo"
-                    font_size: 46
-                    bold: True
-                TextLabel:
-                    id: humidity
-                    text: "97%"
-                    font_size: 50
-                TextLabel:
-                    text: "Ultimo riego"
-                    font_size: 46
-                    bold: True
-                TextLabel:
-                    id: last_time
-                    text: "22:30"
-                    font_size: 50
+            TextLabel:
+                text: "Temperatura"
+                font_size: 40
+                bold: True
+            TextLabel:
+                id: temp
+                text: "34°"
+                font_size: 44
+            TextLabel:
+                text: "Humedad ambiente"
+                font_size: 40
+                bold: True
+            TextLabel:
+                id: env_humidity
+                text: "45%"
+                font_size: 44
+            TextLabel:
+                text: "Humedad del suelo"
+                font_size: 40
+                bold: True
+            TextLabel:
+                id: humidity
+                text: "97%"
+                font_size: 44
+            TextLabel:
+                text: "Ultimo riego"
+                font_size: 40
+                bold: True
+            TextLabel:
+                id: last_time
+                text: "22:30"
+                font_size: 44
                                    
     AnchorLayout:
         anchor_x: 'right'
         anchor_y: 'bottom'
-        padding: '20dp'
+        padding: '30dp'
 
         Button:
-            text: "Burger"
-            size_hint: 0.15, 0.05
+            size_hint: 0.2, 0.1
+            background_color: 0.21, 0.21, 0.21, 0
+            always_release: True
+
+            on_press:
+                burger_image.source = 'images/menu_pressed.png'
+
             on_release:
+                burger_image.source = 'images/menu.png'
                 app.root.current = "menu"
                 root.manager.transition.direction = "left"
+
+            Image:
+                id: burger_image
+                source: 'images/menu.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+            
+            
 
 <Menu>:
     name: "menu"
@@ -104,7 +128,7 @@ TabManager:
         
         canvas.before:
             Color:
-                rgba: 0.6, 0.6, 0.6, 1  
+                rgba: 0.21, 0.21, 0.21, 1  
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -131,12 +155,26 @@ TabManager:
     AnchorLayout:
         anchor_x: 'left'
         anchor_y: 'bottom'
-        padding: '20dp'
+        padding: '30dp'
 
         Button:
-            text: "Return"
-            size_hint: 0.15, 0.05
+            size_hint: 0.2, 0.1
+            background_color: 0.21, 0.21, 0.21, 0
+            always_release: True
+
+            on_press:
+                return_image.source = 'images/return_pressed.png'
+
             on_release:
+                return_image.source = 'images/return.png'
                 app.root.current = "home"
                 root.manager.transition.direction = "right"
+
+            Image:
+                id: return_image
+                source: 'images/return.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+                
 
