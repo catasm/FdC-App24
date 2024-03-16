@@ -1,16 +1,12 @@
+
 #:kivy 2.3.0
 
 TabManager:
     Home:
     Menu:
-
-
-<TextLabel@Label>:
-    color: 0, 0, 0, 1
-
-<Button>:
-    color: 1, 1, 1, 1
-    bold: True
+    Programar:
+    Historico:
+    Configuracion:
 
 <Home>:
     name: "home"
@@ -33,11 +29,11 @@ TabManager:
             row_default_height: '48dp'
             row_force_default: True
 
-            TextLabel:
+            Label:
                 text: "Sistema de Riego"
                 font_size: 68
                 bold: True
-            TextLabel:
+            Label:
                 text: "INSM 2024"
                 font_size: 40
             
@@ -56,7 +52,7 @@ TabManager:
                 row_default_height: '60dp'
                 row_force_default: True
 
-                TextLabel:
+                Label:
                     text: "Aspersores"
                     font_size: 60
                     bold: True
@@ -67,19 +63,19 @@ TabManager:
                 orientation: 'vertical'
                 spacing: '20dp'
 
-                TextLabel:
+                Label:
                     text: "Humedad del suelo"
                     font_size: 46
                     bold: True
-                TextLabel:
+                Label:
                     id: humidity
                     text: "97%"
                     font_size: 50
-                TextLabel:
+                Label:
                     text: "Ultimo riego"
                     font_size: 46
                     bold: True
-                TextLabel:
+                Label:
                     id: last_time
                     text: "22:30"
                     font_size: 50
@@ -116,17 +112,21 @@ TabManager:
 
             Button:
                 text: "Programar\nHORARIO de riego"
-                text_size: self.width - dp(30), None
-                font_size: '24dp'
+                size_hint: None, None
+                size: 200, 100
+                on_release: root.go_to_programar()
+
             Button:
                 text: "Ver\nHISTORICO"
-                text_size: self.width - dp(30), None
-                font_size: '24dp'
+                size_hint: None, None
+                size: 200, 100
+                on_release: root.go_to_historico()
+
             Button:
                 text: "Configuración\nde la APP"
-                text_size: self.width - dp(30), None
-                font_size: '24dp'
-                
+                size_hint: None, None
+                size: 200, 100
+                on_release: root.go_to_configuracion()
 
     AnchorLayout:
         anchor_x: 'left'
@@ -139,4 +139,60 @@ TabManager:
             on_release:
                 app.root.current = "home"
                 root.manager.transition.direction = "right"
+
+<Programar>:
+    start_hour_spinner: start_hour_spinner
+    start_minute_spinner: start_minute_spinner
+    end_hour_spinner: end_hour_spinner
+    end_minute_spinner: end_minute_spinner
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Configurar Horario de Riego'
+        GridLayout:
+            cols: 2
+            Label:
+                text: 'Hora de inicio:'
+            Spinner:
+                id: start_hour_spinner
+                text: '0'
+                values: [str(i) for i in range(25)]
+            Label:
+                text: 'Minuto de inicio:'
+            Spinner:
+                id: start_minute_spinner
+                text: '0'
+                values: [str(i) for i in range(60)]
+            Label:
+                text: 'Hora de fin:'
+            Spinner:
+                id: end_hour_spinner
+                text: '0'
+                values: [str(i) for i in range(25)]
+            Label:
+                text: 'Minuto de fin:'
+            Spinner:
+                id: end_minute_spinner
+                text: '0'
+                values: [str(i) for i in range(60)]
+        Button:
+            text: 'Guardar'
+            on_release: root.save_schedule()
+        Button:
+            text: "Volver"
+            on_release: root.manager.current = "menu"
+
+
+<Historico>:
+    name: "historico"
+    Label:
+        text: "Pantalla de Historial"
+        font_size: 30
+
+<Configuracion>:
+    name: "configuracion"
+    Label:
+        text: "Pantalla de Configuración"
+        font_size: 30
 
