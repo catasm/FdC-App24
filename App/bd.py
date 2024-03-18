@@ -1,6 +1,8 @@
 import sqlite3
 from datetime import datetime
 
+# A
+
 def obtener_nombre_dia(fecha):
     nombres_dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     numero_dia = fecha.weekday()
